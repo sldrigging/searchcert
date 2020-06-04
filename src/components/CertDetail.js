@@ -4,7 +4,7 @@ import Logo from './../assets/logo.svg'
 function CertDetail(props)  {
     const [clicked, setClicked] = useState(false); 
     const [visibility, setVisibility] = useState(true);   
-    const { Serial, SN, Basket, Lining, Eye,prefix ,operator , Part, Name, Width, Length,Ply ,Vertical ,Choker } = props;
+    const {  Serial, prefix, SN, Date, Fabricator, Part, Name, Width, Length, Ply ,Vertical, Choker, VerticalB, EyeL, Eye, Manufacturer } = props;
 
 function handleClick () {
     console.log('clicked');
@@ -25,25 +25,26 @@ function handleClick () {
               <td style={{padding: "8px"}}>Prefix</td>
               <td style={{padding: "8px"}}>SN</td>
               <td style={{padding: "8px"}}>Date</td>
-              <td style={{padding: "8px"}}>Operator</td>
+              <td style={{padding: "8px"}}>Fabricator</td>
               <td style={{padding: "8px"}}>Part</td>
               <td style={{padding: "8px"}}>Name</td>
               <td style={{padding: "8px"}}>Width</td>
               <td style={{padding: "8px"}}>Length</td>
               <td style={{padding: "8px"}}>Ply</td>
-              <td style={{padding: "8px"}}>Vertical</td>
-              <td style={{padding: "8px"}}>Choker</td>
-              <td style={{padding: "8px"}}>Basket</td>
-              <td style={{padding: "8px"}}>Lining</td>
+              <td style={{padding: "8px"}}>Vertical WLL</td>
+              <td style={{padding: "8px"}}>Choker WLL</td>
+              <td style={{padding: "8px"}}>Vertical Basket WLL</td>
+              <td style={{padding: "8px"}}>Eye Lining</td>
               <td style={{padding: "8px"}}>Eye Type</td>
+              <td style={{padding: "8px"}}>Manufacturer</td>
               <td style={{padding: "8px"}} rowSpan={2}  style={{cursor: 'pointer'}} onClick={handleClick}>View Certificate</td>
            </tr>
-           <tr >
+           <tr> 
            <td style={{padding: "8px"}}>{Serial}</td>
            <td style={{padding: "8px"}}>{prefix}</td>
            <td style={{padding: "8px"}}>{SN}</td>
            <td style={{padding: "8px"}}>{Date}</td>
-           <td style={{padding: "8px"}}>{operator}</td>
+           <td style={{padding: "8px"}}>{Fabricator}</td>
            <td style={{padding: "8px"}}>{Part}</td>
            <td style={{padding: "8px"}}>{Name}</td>
            <td style={{padding: "8px"}}>{Width}</td>
@@ -51,9 +52,10 @@ function handleClick () {
            <td style={{padding: "8px"}}>{Ply}</td>
            <td style={{padding: "8px"}}>{Vertical}</td>
            <td style={{padding: "8px"}}>{Choker}</td>
-              <td style={{padding: "8px"}}>{Basket}</td>
-              <td style={{padding: "8px"}}>{Lining}</td>
+              <td style={{padding: "8px"}}>{VerticalB}</td>
+              <td style={{padding: "8px"}}>{EyeL}</td>
               <td style={{padding: "8px"}}>{Eye}</td>
+              <td style={{padding: "8px"}}>{Manufacturer}</td>
            </tr>
       </tbody>
    </table>
@@ -73,14 +75,14 @@ function handleClick () {
         window.location.reload();
     }
       console.log('Data is:',data);
-    const { Serial, SN, Basket, Date, Lining, Eye,prefix ,operator , Part, Name, Width, Length,Ply ,Vertical ,Choker } = data.data;
+    const { Serial, prefix, SN, Date, Fabricator, Part, Name, Width, Length, Ply ,Vertical, Choker, VerticalB, EyeL, Eye, Manufacturer } = data.data;
     return (
         <div>
         <p onClick={handlePrint} style={{fontFamily:'Poppins', fontSize:'16px', margin:'4px', cursor:'pointer'}}><u>Print Certificate</u></p>      
         <div style={{margin: '10px auto',width:'60%', border: '5px solid black', padding:'15px'}}>
         <img src={Logo} alt="Sea-Land Distributors" style={{height:'80px'}}/>
         <p style={{fontSize: '30px', margin:'10px'}}> <u>Certificate of Assurance</u></p>
-        <p  style={{float:'left',fontSize:'12px', color: 'grey'}}> Date: 5/5/2002</p>
+        <p  style={{float:'left',fontSize:'12px', color: 'grey'}}> Date: {Date}</p>
         <p align="right" style={{fontSize:'12px', color: 'grey'}}>Address: 1000 Edwards Avenue, Suite C,<br/>  New Orleans, Louisiana 70123 USA</p>
         
         <div align="center">
@@ -92,22 +94,20 @@ function handleClick () {
            <td style={{padding: "5px", border: "2px solid grey"}}><strong>SN: </strong>{SN}</td>              
        </tr>
        <tr>            
-           <td style={{padding: "5px", border: "2px solid grey"}} colSpan={2}><strong>Part: </strong> {Part}</td>
-           <td style={{padding: "5px", border: "2px solid grey"}} colSpan={2}><strong>Name: </strong> {Name}</td>             
+           <td style={{padding: "5px", border: "2px solid grey"}} colSpan={2}><strong>Manufacturer: </strong> {Manufacturer}</td>
+           <td style={{padding: "5px", border: "2px solid grey"}} colSpan={2}><strong>Fabricator: </strong> {Fabricator}</td>             
        </tr>
        <tr>            
-           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Width: </strong> {Width}</td>
-           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Length :</strong> {Length}</td>    
-           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Ply: </strong> {Ply}</td>     
-           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Vertical: </strong> {Vertical}</td>       
+           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Part: </strong> {Part}</td>
+           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Name :</strong> {Name}</td>    
+           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Width: </strong> {Width}</td>     
+           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Length: </strong> {Length}</td>       
        </tr>
        <tr>            
-           <td style={{padding: "5px", border: "2px solid grey"}} colSpan={2}><strong>Choker: </strong>{Choker}</td>
-           <td style={{padding: "5px", border: "2px solid grey"}} colSpan={2}><strong>Basket: </strong> {Basket}</td>         
-       </tr>
-       <tr>  
-           <td style={{padding: "5px", border: "2px solid grey"}} colSpan={2}><strong>Lining: </strong> {Lining}</td>     
-           <td style={{padding: "5px", border: "2px solid grey"}} colSpan={2}><strong>Eye Type: </strong> {Eye}</td>       
+           <td style={{padding: "5px", border: "2px solid grey"}} ><strong>Ply: </strong>{Ply}</td>
+           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Vertical Wll: </strong> {Vertical}</td> 
+           <td style={{padding: "5px", border: "2px solid grey"}} ><strong>Choker Wll: </strong> {Choker}</td>     
+           <td style={{padding: "5px", border: "2px solid grey"}} ><strong>Vertical WLL: </strong> {VerticalB}</td>   
        </tr>
            </tbody>
            </table>
