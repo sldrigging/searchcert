@@ -28,14 +28,14 @@ function handleClick () {
               <td style={{padding: "8px"}}>Fabricator</td>
               <td style={{padding: "8px"}}>Part</td>
               <td style={{padding: "8px"}}>Name</td>
-              <td style={{padding: "8px"}}>Width</td>
+              {/* <td style={{padding: "8px"}}>Width</td>
               <td style={{padding: "8px"}}>Length</td>
-              <td style={{padding: "8px"}}>Ply</td>
+              <td style={{padding: "8px"}}>Ply</td> */}
               <td style={{padding: "8px"}}>Vertical WLL</td>
               <td style={{padding: "8px"}}>Choker WLL</td>
               <td style={{padding: "8px"}}>Vertical Basket WLL</td>
-              <td style={{padding: "8px"}}>Eye Lining</td>
-              <td style={{padding: "8px"}}>Eye Type</td>
+              {/* <td style={{padding: "8px"}}>Eye Lining</td>
+              <td style={{padding: "8px"}}>Eye Type</td> */}
               <td style={{padding: "8px"}}>Manufacturer</td>
               <td style={{padding: "8px"}} rowSpan={2}  style={{cursor: 'pointer'}} onClick={handleClick}>View Certificate</td>
            </tr>
@@ -47,14 +47,14 @@ function handleClick () {
            <td style={{padding: "8px"}}>{Fabricator}</td>
            <td style={{padding: "8px"}}>{Part}</td>
            <td style={{padding: "8px"}}>{Name}</td>
-           <td style={{padding: "8px"}}>{Width}</td>
+           {/* <td style={{padding: "8px"}}>{Width}</td>
            <td style={{padding: "8px"}}>{Length}</td>
-           <td style={{padding: "8px"}}>{Ply}</td>
+           <td style={{padding: "8px"}}>{Ply}</td> */}
            <td style={{padding: "8px"}}>{Vertical}</td>
            <td style={{padding: "8px"}}>{Choker}</td>
               <td style={{padding: "8px"}}>{VerticalB}</td>
-              <td style={{padding: "8px"}}>{EyeL}</td>
-              <td style={{padding: "8px"}}>{Eye}</td>
+              {/* <td style={{padding: "8px"}}>{EyeL}</td>
+              <td style={{padding: "8px"}}>{Eye}</td> */}
               <td style={{padding: "8px"}}>{Manufacturer}</td>
            </tr>
       </tbody>
@@ -99,15 +99,12 @@ function handleClick () {
        </tr>
        <tr>            
            <td style={{padding: "5px", border: "2px solid grey"}}><strong>Part: </strong> {Part}</td>
-           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Name :</strong> {Name}</td>    
-           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Width: </strong> {Width}</td>     
-           <td style={{padding: "5px", border: "2px solid grey"}}><strong>Length: </strong> {Length}</td>       
+           <td style={{padding: "5px", border: "2px solid grey"}} colSpan={3}><strong>Name :</strong> {Name}</td>  
        </tr>
-       <tr>            
-           <td style={{padding: "5px", border: "2px solid grey"}} ><strong>Ply: </strong>{Ply}</td>
+       <tr>
            <td style={{padding: "5px", border: "2px solid grey"}}><strong>Vertical Wll: </strong> {Vertical}</td> 
            <td style={{padding: "5px", border: "2px solid grey"}} ><strong>Choker Wll: </strong> {Choker}</td>     
-           <td style={{padding: "5px", border: "2px solid grey"}} ><strong>Vertical WLL: </strong> {VerticalB}</td>   
+           <td style={{padding: "5px", border: "2px solid grey"}}colSpan={2} ><strong>Vertical WLL: </strong> {VerticalB}</td>   
        </tr>
            </tbody>
            </table>
