@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import Sheet from './TestData.json'
 import './../App.css';
 import CertDetail from './CertDetail'
-import Logo from './../assets/logo.svg'
-import CertList from './CertList'
 import Certificate from './Certificate'
 import Tabletop from 'tabletop';
 
 function Test() {
   const [search, setSearch] = useState("");
   const [filtereddata, setFilteredData] = useState([]);
-  const [cert, setcert] = useState([]);
+  // const [cert, setcert] = useState([]);
   
   useEffect(() => {
     // Update the document title using the browser API

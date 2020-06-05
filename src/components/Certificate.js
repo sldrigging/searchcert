@@ -12,12 +12,14 @@ export default function Certificate(props) {
     fontSize: "13px",
     paddingRight: "2px",
     margin: "8px",
+    fontFamily:'trade-gothic-next'
   };
 
   const datastyle = {
     fontSize: "13px",
     textAlign: "left",
     margin: "8px",
+    fontFamily:'trade-gothic-next'
   };
 
   function handlePrint() {
@@ -26,21 +28,14 @@ export default function Certificate(props) {
 
   console.log("Data is:", props);
   const {
-    Serial,
-    prefix,
-    SN,
+    Serial,    
     Date,
     Fabricator,
     Part,
-    Name,
-    Width,
-    Length,
-    Ply,
+    Name,    
     Vertical,
     Choker,
     VerticalB,
-    EyeL,
-    Eye,
     Manufacturer,
   } = props;
   return (
@@ -73,7 +68,7 @@ export default function Certificate(props) {
           <Grid item lg={6}>
             <p
               align="right"
-              style={{ fontSize: "12px", color: "grey", textAlign: "right" }}
+              style={{ fontSize: "12px", textAlign: "right" }}
             >
               Address: 1000 Edwards Avenue, Suite C,
               <br /> New Orleans, LA, USA 70123
@@ -81,8 +76,8 @@ export default function Certificate(props) {
               <a
                 href="https://www.thor-tex.com/"
                 target="_blank"
-                rel="nopener"
-                style={{ textDecoration: "none", color: "grey" }}
+                rel="noopener noreferrer"
+                style={{ textDecoration: "none", color: "black" }}
               >
                 THOR-TEX.com
               </a>{" "}
@@ -90,7 +85,7 @@ export default function Certificate(props) {
             </p>
           </Grid>
         </Grid>
-        <p style={{ fontSize: "45px", margin: "10px", fontFamily: "Anton" }}>
+        <p style={{ fontSize: "35px", margin: "10px 0", fontFamily: "Archivo Black" }}>
           {" "}
           CERTIFICATE OF CONFORMANCE
         </p>
@@ -200,14 +195,14 @@ export default function Certificate(props) {
             <img src={XQ1} alt="XQ2" style={{ height: "70px" }} />
           </Grid>
           <Grid item lg={8} style={{ paddingTop: "25px" }}>
-            <p style={{ fontSize: "14px" }}>
+            <p style={{ fontSize: "14px", fontFamily:'trade-gothic-next' }}>
               <i>
                 <strong>
                   Learn more about XQ Quality Assurance at{" "}
                   <a
                     href="http://xqassurance.com/"
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                     style={{ textDecoration: "none", color: "black" }}
                   >
                     XQAssurance.com
@@ -217,7 +212,7 @@ export default function Certificate(props) {
             </p>
           </Grid>
         </Grid>
-        <p style={{ fontSize: "15px", textAlign: "left" }}>
+        <p style={{ fontSize: "15px", textAlign: "left", fontFamily:'trade-gothic-next' }}>
           <strong>Statement: </strong>
           <br />
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et
@@ -278,7 +273,7 @@ export default function Certificate(props) {
           </Grid>
         </Grid>
         <br />
-        <p style={{ fontSize: "14px", color: "grey" }}>
+        <p style={{ fontSize: "14px", fontFamily:'trade-gothic-next' }}>
           THOR-TEX USA is a registered trademark and division of Sea-Land
           Distributors, LLC.
         </p>

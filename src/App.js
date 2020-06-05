@@ -1,18 +1,13 @@
 import React, {Component} from 'react';
 import './App.css';
-import {  BrowserRouter as Router,  Switch,  Route,  Link} from "react-router-dom";
+import {  BrowserRouter as Router,  Switch,  Route} from "react-router-dom";
 import Home from './components/Home'
 import CertList from './components/CertList'
 import Certificate from './components/Certificate';
 import About from './components/About'
 
 class App extends Component {
-  constructor() {
-    super()
-    
-  }
-
-
+  
   render() {
     
   return(
