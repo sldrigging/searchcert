@@ -137,7 +137,7 @@ export default function Certificate(props) {
               </Grid>
 
               <br />
-
+                <br/>
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p
