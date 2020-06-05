@@ -1,15 +1,42 @@
-import React, {useEffect} from 'react';
+import React, {Component} from 'react';
 import './App.css';
-import Test from './components/Test'
-const App =() => {
+import {  BrowserRouter as Router,  Switch,  Route,  Link} from "react-router-dom";
+import Home from './components/Home'
+import CertList from './components/CertList'
+import Certificate from './components/Certificate';
+import About from './components/About'
+
+class App extends Component {
+  constructor() {
+    super()
+    
+  }
 
 
- 
+  render() {
+    
   return(
-    <div className="App">     
-      <Test/>
-  </div>
-  )
+    <Router>
+      <div>  
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/certlist">
+            <CertList />
+          </Route>
+          <Route path="/certificate">
+            <Certificate />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>    
+  )}
 }
-
 export default App;
+
+
+
