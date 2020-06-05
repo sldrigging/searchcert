@@ -2,8 +2,9 @@ import React from "react";
 import Logo from "./../assets/logo.svg";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import XQ1 from "./../assets/XQ1.svg";
-import XQ2 from "./../assets/XQ2.svg";
+import XQ1 from "./../assets/XQ1.png";
+import XQ2 from "./../assets/XQ2.png";
+import Mike from './../assets/mike.png'
 
 export default function Certificate(props) {
   const titlestyle = {
@@ -246,22 +247,21 @@ export default function Certificate(props) {
               </Grid>
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={titlestyle}>
+                <p style={titlestyle}>
                     <strong>XQ Admin:</strong>
                   </p>
                 </Grid>
-                <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={datastyle}>_____________________ </p>
+                <Grid item xs={6} style={{textAlign: 'left'}}>
+                 <img src={Mike} alt="sign" style={{height: '40px', borderBottom: '1px solid black', margin:'2px'}}/> 
                 </Grid>
               </Grid>
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={titlestyle}>
-                    <strong></strong>
-                  </p>
+               
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={datastyle}>Mike Hall </p>
+                  <p style={{margin: '0 0 8px 8px', fontSize: "13px", textAlign: "left",}}>
+                      Mike Hall </p>
                 </Grid>
               </Grid>
               <Grid container spacing={2} align="center">
