@@ -6,7 +6,7 @@ import XQ1 from "./../assets/XQ1.png";
 import XQ2 from "./../assets/XQ2.png";
 import Mike from './../assets/mike.png'
 
-export default function Certificate(props) {
+const Certificate = (props) => {
   const titlestyle = {
     textAlign: "right",
     fontSize: "13px",
@@ -26,7 +26,6 @@ export default function Certificate(props) {
     window.print();
   }
 
-  console.log("Data is:", props);
   const {
     Serial,    
     Date,
@@ -38,6 +37,8 @@ export default function Certificate(props) {
     VerticalB,
     Manufacturer,
   } = props;
+
+  console.log("Data is:", props.cert);
   return (
     <div style={{ padding: "5px" }}>
       <p
@@ -95,7 +96,7 @@ export default function Certificate(props) {
             <Grid container spacing={0}>
               <Grid item xs={6}>
                 <p style={titlestyle}>
-                  <strong>Serial #: </strong>
+                  <strong>Serial # : </strong>
                 </p>
               </Grid>
               <Grid item xs={6}>
@@ -104,7 +105,7 @@ export default function Certificate(props) {
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
-                    <strong>Manufacturer:</strong>
+                    <strong>Manufacturer :</strong>
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
@@ -114,7 +115,7 @@ export default function Certificate(props) {
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
-                    <strong>Part #:</strong>
+                    <strong>Part # :</strong>
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
@@ -124,7 +125,7 @@ export default function Certificate(props) {
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
-                    <strong>Part Description:</strong>
+                    <strong>Part Description : </strong>
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
@@ -154,7 +155,7 @@ export default function Certificate(props) {
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
-                    <strong>Vertical:</strong>
+                    <strong>Vertical WLL : </strong>
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
@@ -164,7 +165,7 @@ export default function Certificate(props) {
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
-                    <strong>Choker:</strong>
+                    <strong>Choker WLL : </strong>
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
@@ -174,7 +175,7 @@ export default function Certificate(props) {
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
-                    <strong>Vertical Basket WLL:</strong>
+                    <strong>Vertical Basket WLL : </strong>
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
@@ -298,3 +299,5 @@ export default function Certificate(props) {
     </div>
   );
 }
+
+export default Certificate;

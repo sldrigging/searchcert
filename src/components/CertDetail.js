@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import  Certificate from './Certificate';
 
-function CertDetail(props) {
+const CertDetail = (props) => {
   const mystyle = {
     padding: "8px",
   };
@@ -18,7 +19,9 @@ function CertDetail(props) {
     Choker,
     VerticalB,
     Manufacturer,
-  } = props;
+  } = props.cert;
+
+  
 
   //  function handleClick () {
   //      console.log('clicked');
@@ -51,7 +54,9 @@ function CertDetail(props) {
               <td style={mystyle}>Eye Type</td> */}
             <td style={mystyle}>Manufacturer</td>
             <td style={mystyle} rowSpan={2} style={{ cursor: "pointer" }} >
-              <Link to="/certificate"> View Certificate</Link>
+            <Link to="/certificate"> View Certificate</Link>
+                
+              
             </td>
           </tr>
           <tr>

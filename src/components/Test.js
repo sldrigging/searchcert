@@ -4,26 +4,37 @@ import './../App.css';
 import CertDetail from './CertDetail'
 import Certificate from './Certificate'
 import Tabletop from 'tabletop';
+import { useForm } from "react-hook-form";
+
 
 function Test() {
   const [search, setSearch] = useState("");
   const [filtereddata, setFilteredData] = useState([]);
-  // const [cert, setcert] = useState([]);
-  
+   const [certError, setcertError] = useState("Please enter a valid Serial Number");
+ 
+   
   useEffect(() => {
     // Update the document title using the browser API
     Tabletop.init({
-      key: '1yWA49aKE3vSi4C0p7G1Z6CFBoJocEPPJOI1g0whdsyI',
-      callback: googleData => {
-        console.log('google sheet data --->', googleData);
-      },
+      key: '1uC0pB_Ku_UIH0HfuA2DU_qm-gRdzO3aONHZE3OwxsFQ',
+      callback: showInfo,
       simpleSheet: true
     })
   });
   
- 
+  function showInfo(data, tabletop) {
+    JSON.stringify(data, null, 2);
+    const certs = data;
+    console.log(certs);
+  }
+
+ function handleChange (e) {  
+  setSearch(e.target.value);
+  }
+
 const data = Sheet;
-  const onSearch = () => {       
+
+  const onSearch = () => {          
     setFilteredData(
       data.filter(cert =>
         cert.Serial.includes(search)
@@ -35,19 +46,22 @@ const data = Sheet;
     <div className="App">
       <h1>Cert Search for Certificate of Assurance</h1>
       <input
-        type="number" name="cert" min="10000001" max="100000020"  minLength={9}
+        type="number" name="cert" min="10000001" max="100000020"   
       style={{height: '35px', margin: '5px', width:'300px'}}
         placeholder="Enter the Serial Number (Eg: 10000001)"
-        onChange={e => setSearch(e.target.value)}
+        onChange={handleChange} value={search}
       />
+      {!search || search < 10000000 || search > 100000022 ?<p style={{color:'grey', fontSize:'14px'}}>{certError}</p> : null} 
+      
       <br/>
-      <button onClick={onSearch} style={{ backgroundColor:'#02192D',  border:'none', color:'white', height:'40px', fontFamily:'Poppins', fontSize:'20px'}}>Search</button>
-      {filtereddata.map((cert, Serial) => (
-        <CertDetail key={Serial} {...cert} />
+      <button  disabled={!search || search < 10000000 || search > 10000020} onClick={onSearch} style={{ backgroundColor:'#02192D',  border:'none', color:'white', height:'40px', fontFamily:'Poppins', fontSize:'20px'}}>Search</button>
+
+      {filtereddata.map((cert) => (
+        <CertDetail key={cert.Serial} cert ={cert} />
       ))} 
-       {filtereddata.map((cert, Serial) => (
+         {filtereddata.map((cert, Serial) => (
         <Certificate key={Serial} {...cert} />
-      ))}   
+      ))} 
       
                   
     </div>
