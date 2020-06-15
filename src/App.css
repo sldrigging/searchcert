@@ -1,6 +1,21 @@
 body{
   background-color: beige;
 }
+
+/* #printme {
+  display: none;
+}
+@media print {
+  #printme {
+      display: block;
+  }
+} */
+
+.container {
+  display: none;
+}
+
+
 .App{
   text-align: center;
   font-family: 'eurostile', sans-serif;

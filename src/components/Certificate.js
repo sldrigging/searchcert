@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import XQ1 from "./../assets/XQ1.png";
 import XQ2 from "./../assets/XQ2.png";
-import Mike from './../assets/mike.png'
+import Mike from "./../assets/mike.png";
 
 const Certificate = (props) => {
   const titlestyle = {
@@ -12,26 +12,22 @@ const Certificate = (props) => {
     fontSize: "13px",
     paddingRight: "2px",
     margin: "8px",
-    fontFamily:'trade-gothic-next'
+    fontFamily: "trade-gothic-next",
   };
 
   const datastyle = {
     fontSize: "13px",
     textAlign: "left",
     margin: "8px",
-    fontFamily:'trade-gothic-next'
+    fontFamily: "trade-gothic-next",
   };
 
-  function handlePrint() {
-    window.print();
-  }
-
   const {
-    Serial,    
+    Serial,
     Date,
     Fabricator,
     Part,
-    Name,    
+    Name,
     Vertical,
     Choker,
     VerticalB,
@@ -41,19 +37,6 @@ const Certificate = (props) => {
   console.log("Data is:", props.cert);
   return (
     <div style={{ padding: "5px" }}>
-      <p
-        onClick={handlePrint}
-        style={{
-          fontFamily: "Poppins",
-          fontSize: "14px",
-          color: "grey",
-          margin: "4px",
-          cursor: "pointer",
-        }}
-      >
-        <u>Print Certificate</u>
-      </p>
-
       <div
         style={{
           margin: "10px auto",
@@ -67,10 +50,7 @@ const Certificate = (props) => {
             <img src={Logo} alt="THOR-TEX logo" style={{ height: "70px" }} />
           </Grid>
           <Grid item lg={6}>
-            <p
-              align="right"
-              style={{ fontSize: "12px", textAlign: "right" }}
-            >
+            <p align="right" style={{ fontSize: "12px", textAlign: "right" }}>
               Address: 1000 Edwards Avenue, Suite C,
               <br /> New Orleans, LA, USA 70123
               <br />
@@ -86,7 +66,13 @@ const Certificate = (props) => {
             </p>
           </Grid>
         </Grid>
-        <p style={{ fontSize: "35px", margin: "10px 0", fontFamily: "Archivo Black" }}>
+        <p
+          style={{
+            fontSize: "35px",
+            margin: "10px 0",
+            fontFamily: "Archivo Black",
+          }}
+        >
           {" "}
           CERTIFICATE OF CONFORMANCE
         </p>
@@ -134,7 +120,7 @@ const Certificate = (props) => {
               </Grid>
 
               <br />
-                <br/>
+              <br />
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p
@@ -196,7 +182,7 @@ const Certificate = (props) => {
             <img src={XQ1} alt="XQ2" style={{ height: "70px" }} />
           </Grid>
           <Grid item lg={8} style={{ paddingTop: "25px" }}>
-            <p style={{ fontSize: "14px", fontFamily:'trade-gothic-next' }}>
+            <p style={{ fontSize: "14px", fontFamily: "trade-gothic-next" }}>
               <i>
                 <strong>
                   Learn more about XQ Quality Assurance at{" "}
@@ -213,7 +199,13 @@ const Certificate = (props) => {
             </p>
           </Grid>
         </Grid>
-        <p style={{ fontSize: "15px", textAlign: "left", fontFamily:'trade-gothic-next' }}>
+        <p
+          style={{
+            fontSize: "15px",
+            textAlign: "left",
+            fontFamily: "trade-gothic-next",
+          }}
+        >
           <strong>Statement: </strong>
           <br />
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et
@@ -243,21 +235,34 @@ const Certificate = (props) => {
               </Grid>
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                <p style={titlestyle}>
+                  <p style={titlestyle}>
                     <strong>XQ Admin:</strong>
                   </p>
                 </Grid>
-                <Grid item xs={6} style={{textAlign: 'left'}}>
-                 <img src={Mike} alt="sign" style={{height: '40px', borderBottom: '1px solid black', margin:'2px'}}/> 
+                <Grid item xs={6} style={{ textAlign: "left" }}>
+                  <img
+                    src={Mike}
+                    alt="sign"
+                    style={{
+                      height: "40px",
+                      borderBottom: "1px solid black",
+                      margin: "2px",
+                    }}
+                  />
                 </Grid>
               </Grid>
               <Grid container spacing={2} align="center">
+                <Grid item xs={6} style={{ padding: "0px" }}></Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
-               
-                </Grid>
-                <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={{margin: '0 0 8px 8px', fontSize: "13px", textAlign: "left",}}>
-                      Mike Hall </p>
+                  <p
+                    style={{
+                      margin: "0 0 8px 8px",
+                      fontSize: "13px",
+                      textAlign: "left",
+                    }}
+                  >
+                    Mike Hall{" "}
+                  </p>
                 </Grid>
               </Grid>
               <Grid container spacing={2} align="center">
@@ -274,7 +279,7 @@ const Certificate = (props) => {
           </Grid>
         </Grid>
         <br />
-        <p style={{ fontSize: "14px", fontFamily:'trade-gothic-next' }}>
+        <p style={{ fontSize: "14px", fontFamily: "trade-gothic-next" }}>
           THOR-TEX USA is a registered trademark and division of Sea-Land
           Distributors, LLC.
         </p>
@@ -298,6 +303,6 @@ const Certificate = (props) => {
       </form>
     </div>
   );
-}
+};
 
 export default Certificate;
