@@ -1,11 +1,39 @@
-import React from 'react'
+import React, { Component } from 'react';
+import Tabletop from 'tabletop';
+import Home from './Home'
 
-export default class MyPrintableComponent extends React.Component {
-    render () {
-        return (
-            <div id={this.props.printableId}>
-                <h1>IM GUNNA PRINT</h1>
-            </div>
-        )
-    }
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      data: [],
+      search:'',
+      filteredData:[]
+    }      
+  }
+
+  componentDidMount() {
+    Tabletop.init({
+        key: '1uC0pB_Ku_UIH0HfuA2DU_qm-gRdzO3aONHZE3OwxsFQ',
+      callback: googleData => {
+        this.setState({
+          data: googleData
+        })
+      },
+      simpleSheet: true
+    })
+  }
+  
+
+  render() {
+    
+    const { data } = this.state
+    
+    return (       
+          <Home data={data}/>
+       
+    );
+  }
 }
+
+export default App;

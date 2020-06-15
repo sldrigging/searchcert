@@ -1,20 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Sheet from './TestData.json'
 import './../App.css';
 import CertDetail from './CertDetail'
+import Tabletop from 'tabletop';
 
 
-function Test(props) {
+function Test() {
   const [search, setSearch] = useState("");
   const [filtereddata, setFilteredData] = useState([]);
    const [certError] = useState("Please enter a valid Serial Number");
-
  
+   
+  useEffect(() => {
+    // Update the document title using the browser API
+    Tabletop.init({
+      key: '1uC0pB_Ku_UIH0HfuA2DU_qm-gRdzO3aONHZE3OwxsFQ',
+      callback: showInfo,
+      simpleSheet: true
+    })
+  });
+  
+  function showInfo(data, tabletop) {
+    JSON.stringify(data, null, 2);
+    const certs = data;
+    console.log(certs);
+  }
 
  function handleChange (e) {  
   setSearch(e.target.value);
   }
 
-const data = props.data;
+const data = Sheet;
 
   const onSearch = () => {          
     setFilteredData(
@@ -33,12 +49,10 @@ const data = props.data;
         placeholder="Enter the Serial Number (Eg: 10000001)"
         onChange={handleChange} value={search}
       />
-      {!search || search < 10000000 || search > 10000022 ?<p style={{color:'grey', fontSize:'14px'}}>{certError}</p> : null} 
+      {!search || search < 10000000 || search > 100000022 ?<p style={{color:'grey', fontSize:'14px'}}>{certError}</p> : null} 
       
       <br/>
-      <button  
-      disabled={!search || search < 10000001 || search > 10000022} 
-      onClick={onSearch} style={{ backgroundColor:'#02192D',  border:'none', color:'white', height:'40px', fontFamily:'Poppins', fontSize:'20px'}}>Search</button>
+      <button  disabled={!search || search < 10000000 || search > 10000020} onClick={onSearch} style={{ backgroundColor:'#02192D',  border:'none', color:'white', height:'40px', fontFamily:'Poppins', fontSize:'20px'}}>Search</button>
 
       {filtereddata.map((cert) => (
         <CertDetail key={cert.Serial} cert ={cert} />

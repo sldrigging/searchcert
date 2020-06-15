@@ -1,20 +1,22 @@
-import React, {useRef } from "react";
+import React from "react";
 import { Grid } from "@material-ui/core";
 import XQ1 from "./../assets/XQ1.png";
 import XQ2 from "./../assets/XQ2.png";
 import Mike from "./../assets/mike.png";
 import Logo from "./../assets/logo.svg";
 
-const CertDetail = (props) => { 
-
-  function printOrder () {
-    const printableElements = document.getElementById('printme').innerHTML;
-        const orderHtml = '<html><head><title>Certificate of Conformance</title></head><body>' + printableElements + '</body></html>'
-        const oldPage = document.body.innerHTML;
-        document.body.innerHTML = orderHtml;
-        window.print();
-        document.body.innerHTML = oldPage
-}
+const CertDetail = (props) => {
+  function printOrder() {
+    const printableElements = document.getElementById("printme").innerHTML;
+    const orderHtml =
+      "<html><head><title>Certificate of Conformance</title></head><body>" +
+      printableElements +
+      "</body></html>";
+    const oldPage = document.body.innerHTML;
+    document.body.innerHTML = orderHtml;
+    window.print();
+    document.body.innerHTML = oldPage;
+  }
   const mystyle = {
     padding: "8px",
   };
@@ -31,7 +33,8 @@ const CertDetail = (props) => {
     Vertical,
     Choker,
     VerticalB,
-    Manufacturer, Fabricator
+    Manufacturer,
+    Fabricator,
   } = props.cert;
 
   return (
@@ -49,7 +52,14 @@ const CertDetail = (props) => {
             <td style={mystyle}>Choker WLL</td>
             <td style={mystyle}>Vertical Basket WLL</td>
             <td style={mystyle}>Manufacturer</td>
-            <td rowSpan={2} style={mystyle} onClick={viewCert} style={{cursor: 'pointer', fontSize:'25px'}}>View Certificate</td>
+            <td
+              rowSpan={2}
+              style={mystyle}
+              onClick={viewCert}
+              style={{ cursor: "pointer", fontSize: "25px" }}
+            >
+              View Certificate
+            </td>
           </tr>
           <tr>
             <td style={mystyle}>{Serial}</td>
@@ -67,16 +77,33 @@ const CertDetail = (props) => {
       </table>
       {/* <Test cert={props.cert} style={{display:'none'}}/> */}
 
-      <div id="myP" className='container'>
-                <div onClick={() => printOrder()} style={{cursor:'pointer', fontSize:'25px', textDecoration:'underline'}}>
-                    Print Certificate
-                </div>
-                <Test printableId='printme' s={Serial} m={Manufacturer} p={Part} pd={Name} v={Vertical} c ={Choker} vb={VerticalB} f={Fabricator} d={Date}/>
-            </div> 
+      <div id="myP" className="container">
+        <div
+          onClick={() => printOrder()}
+          style={{
+            cursor: "pointer",
+            fontSize: "25px",
+            textDecoration: "underline",
+          }}
+        >
+          Print Certificate
+        </div>
+        <Test
+          printableId="printme"
+          s={Serial}
+          m={Manufacturer}
+          p={Part}
+          pd={Name}
+          v={Vertical}
+          c={Choker}
+          vb={VerticalB}
+          f={Fabricator}
+          d={Date}
+        />
+      </div>
     </div>
   );
 };
-
 
 export default CertDetail;
 
@@ -94,10 +121,10 @@ const datastyle = {
   margin: "8px",
   fontFamily: "trade-gothic-next",
 };
-function Test(props)  {  
-      return (
-          <div id={props.printableId}>
-             <div
+function Test(props) {
+  return (
+    <div id={props.printableId}>
+      <div
         style={{
           margin: "10px auto",
           width: "600px",
@@ -105,7 +132,7 @@ function Test(props)  {
           padding: "15px",
         }}
       >
-              <Grid container spacing={0}>
+        <Grid container spacing={0}>
           <Grid item lg={6}>
             <img src={Logo} alt="THOR-TEX logo" style={{ height: "63px" }} />
           </Grid>
@@ -126,7 +153,6 @@ function Test(props)  {
             </p>
           </Grid>
         </Grid>
-
         <p
           style={{
             fontSize: "30px",
@@ -341,9 +367,7 @@ function Test(props)  {
           THOR-TEX USA is a registered trademark and division of Sea-Land
           Distributors, LLC.
         </p>
-
-
-        </div>
-          </div>
-      )
-  }
+      </div>
+    </div>
+  );
+}
