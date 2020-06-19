@@ -44,6 +44,7 @@ export default class ValiationForm extends React.Component {
       
       // clear form
       this.setState({cert: "", certError: "", filteredData: [], newdata: this.state.filteredData});
+      document.getElementById("form").style.display = "none";
     }
   };
 
@@ -54,14 +55,16 @@ export default class ValiationForm extends React.Component {
     this.setState({
       filteredData: data.filter((x) => x.Serial.includes(cert)),
     });
+    
   };
-
+  
   render() {    
    // console.log("hey now",this.state.filteredData)
     return (
       <div className="App">
         <h1>Cert Search for Certificate of Assurance</h1>
-        <form onSubmit={this.handleSubmit}>
+       
+        <form onSubmit={this.handleSubmit} id="form">
           <div>
             <input
               type="number" 

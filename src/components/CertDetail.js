@@ -7,6 +7,7 @@ import Logo from "./../assets/logo.svg";
 
 const CertDetail = (props) => {
   function printOrder() {
+    let newWin = window.open("Certificate of Assurance", "hello", "top=20,left=50,width=700,height=650,scrollbars=yes");
     const printableElements = document.getElementById("printme").innerHTML;
     const orderHtml =
       "<html><head><title>Certificate of Conformance</title></head><body>" +
@@ -14,8 +15,12 @@ const CertDetail = (props) => {
       "</body></html>";
     const oldPage = document.body.innerHTML;
     document.body.innerHTML = orderHtml;
-    window.print();
     document.body.innerHTML = oldPage;
+    //window.print();
+    newWin.document.write(printableElements);
+    
+    window.location.reload(false);
+    
   }
   const mystyle = {
     padding: "8px",
@@ -25,8 +30,6 @@ const CertDetail = (props) => {
   }
   const {
     Serial,
-    prefix,
-    SN,
     Date,
     Part,
     Name,
@@ -37,14 +40,23 @@ const CertDetail = (props) => {
     Fabricator,
   } = props.cert;
 
+  function handlePrompt  (){
+    window.location.reload(true);
+  }
+function handleClick () { 
+  console.log('clicked')
+  document.getElementById("myP").style.display = "block";
+  return (
+    
+  <Test cert={props.cert} style={{display:'none'}}/>
+  )}
   return (
     <div align="center">
+       <h2 id="promt" onClick={handlePrompt} style={{cursor:'pointer'}} >Make new Search</h2>
       <table border="1px solid grey" style={{ margin: "20px" }}>
         <tbody>
           <tr>
             <td style={mystyle}>Serial #</td>
-            <td style={mystyle}>Prefix</td>
-            <td style={mystyle}>SN</td>
             <td style={mystyle}>Date</td>
             <td style={mystyle}>Part #</td>
             <td style={mystyle}>Name</td>
@@ -52,19 +64,17 @@ const CertDetail = (props) => {
             <td style={mystyle}>Choker WLL</td>
             <td style={mystyle}>Vertical Basket WLL</td>
             <td style={mystyle}>Manufacturer</td>
-            <td
+             <td
               rowSpan={2}
               style={mystyle}
               onClick={viewCert}
               style={{ cursor: "pointer", fontSize: "22px", padding:'5px' }}
-            >
+               onClick={handleClick}>
               View Certificate
-            </td>
+            </td> 
           </tr>
           <tr>
-            <td style={mystyle}>{Serial}</td>
-            <td style={mystyle}>{prefix}</td>
-            <td style={mystyle}>{SN}</td>
+            <td style={mystyle}>{Serial}</td>           
             <td style={mystyle}>{Date}</td>
             <td style={mystyle}>{Part}</td>
             <td style={mystyle}>{Name}</td>
@@ -75,9 +85,9 @@ const CertDetail = (props) => {
           </tr>
         </tbody>
       </table>
-      {/* <Test cert={props.cert} style={{display:'none'}}/> */}
+         
 
-      <div id="myP" className="container">
+      <div id="myP" className="container" style={{display:'none'}}>
         <div
           onClick={() => printOrder()}
           style={{
@@ -88,7 +98,7 @@ const CertDetail = (props) => {
         >
           Print Certificate
         </div>
-        <Test
+         <Test
           printableId="printme"
           s={Serial}
           m={Manufacturer}
@@ -99,7 +109,7 @@ const CertDetail = (props) => {
           vb={VerticalB}
           f={Fabricator}
           d={Date}
-        /> 
+        />  
       </div>
     </div>
   );
@@ -121,6 +131,7 @@ const datastyle = {
   margin: "8px",
   fontFamily: "trade-gothic-next",
 };
+
 function Test(props) {
   return (
     <div id={props.printableId}>
