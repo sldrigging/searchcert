@@ -1,140 +1,53 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import Logo from "./../assets/logo.svg";
+import { Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
 import XQ1 from "./../assets/XQ1.png";
 import XQ2 from "./../assets/XQ2.png";
 import Mike from "./../assets/mike.png";
-import Logo from "./../assets/logo.svg";
 
-const CertDetail = (props) => {
-  function printOrder() {
-    const printableElements = document.getElementById("printme").innerHTML;
-    const orderHtml =
-      "<html><head><title>Certificate of Conformance</title></head><body>" +
-      printableElements +
-      "</body></html>";
-    const oldPage = document.body.innerHTML;
-    document.body.innerHTML = orderHtml;
-    window.print();
-    document.body.innerHTML = oldPage;
-  }
-  const mystyle = {
-    padding: "8px",
+const Certificate = (props) => {
+  const titlestyle = {
+    textAlign: "right",
+    fontSize: "13px",
+    paddingRight: "2px",
+    margin: "8px",
+    fontFamily: "trade-gothic-next",
   };
-  function viewCert() {
-    document.getElementById("myP").style.display = "block";
-  }
+
+  const datastyle = {
+    fontSize: "13px",
+    textAlign: "left",
+    margin: "8px",
+    fontFamily: "trade-gothic-next",
+  };
+
   const {
     Serial,
-    prefix,
-    SN,
     Date,
+    Fabricator,
     Part,
     Name,
     Vertical,
     Choker,
     VerticalB,
     Manufacturer,
-    Fabricator,
-  } = props.cert;
+  } = props;
 
+  console.log("Data is:", props.cert);
   return (
-    <div align="center">
-      <table border="1px solid grey" style={{ margin: "20px" }}>
-        <tbody>
-          <tr>
-            <td style={mystyle}>Serial #</td>
-            <td style={mystyle}>Prefix</td>
-            <td style={mystyle}>SN</td>
-            <td style={mystyle}>Date</td>
-            <td style={mystyle}>Part #</td>
-            <td style={mystyle}>Name</td>
-            <td style={mystyle}>Vertical WLL</td>
-            <td style={mystyle}>Choker WLL</td>
-            <td style={mystyle}>Vertical Basket WLL</td>
-            <td style={mystyle}>Manufacturer</td>
-            <td
-              rowSpan={2}
-              style={mystyle}
-              onClick={viewCert}
-              style={{ cursor: "pointer", fontSize: "22px", padding:'5px' }}
-            >
-              View Certificate
-            </td>
-          </tr>
-          <tr>
-            <td style={mystyle}>{Serial}</td>
-            <td style={mystyle}>{prefix}</td>
-            <td style={mystyle}>{SN}</td>
-            <td style={mystyle}>{Date}</td>
-            <td style={mystyle}>{Part}</td>
-            <td style={mystyle}>{Name}</td>
-            <td style={mystyle}>{Vertical}</td>
-            <td style={mystyle}>{Choker}</td>
-            <td style={mystyle}>{VerticalB}</td>
-            <td style={mystyle}>{Manufacturer}</td>
-          </tr>
-        </tbody>
-      </table>
-      {/* <Test cert={props.cert} style={{display:'none'}}/> */}
-
-      <div id="myP" className="container">
-        <div
-          onClick={() => printOrder()}
-          style={{
-            cursor: "pointer",
-            fontSize: "25px",
-            textDecoration: "underline",
-          }}
-        >
-          Print Certificate
-        </div>
-        <Test
-          printableId="printme"
-          s={Serial}
-          m={Manufacturer}
-          p={Part}
-          pd={Name}
-          v={Vertical}
-          c={Choker}
-          vb={VerticalB}
-          f={Fabricator}
-          d={Date}
-        /> 
-      </div>
-    </div>
-  );
-};
-
-export default CertDetail;
-
-const titlestyle = {
-  textAlign: "right",
-  fontSize: "13px",
-  paddingRight: "2px",
-  margin: "8px",
-  fontFamily: "trade-gothic-next",
-};
-
-const datastyle = {
-  fontSize: "13px",
-  textAlign: "left",
-  margin: "8px",
-  fontFamily: "trade-gothic-next",
-};
-function Test(props) {
-  return (
-    <div id={props.printableId}>
+    <div style={{ padding: "5px" }}>
       <div
         style={{
           margin: "10px auto",
-          width: "600px",
+          width: "660px",
           border: "5px solid black",
           padding: "15px",
         }}
       >
         <Grid container spacing={0}>
           <Grid item lg={6}>
-            <img src={Logo} alt="THOR-TEX logo" style={{ height: "63px" }} />
+            <img src={Logo} alt="THOR-TEX logo" style={{ height: "70px" }} />
           </Grid>
           <Grid item lg={6}>
             <p align="right" style={{ fontSize: "12px", textAlign: "right" }}>
@@ -155,7 +68,7 @@ function Test(props) {
         </Grid>
         <p
           style={{
-            fontSize: "30px",
+            fontSize: "35px",
             margin: "10px 0",
             fontFamily: "Archivo Black",
           }}
@@ -173,7 +86,7 @@ function Test(props) {
                 </p>
               </Grid>
               <Grid item xs={6}>
-                <p style={datastyle}>{props.s}</p>
+                <p style={datastyle}>{Serial}</p>
               </Grid>
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
@@ -182,7 +95,7 @@ function Test(props) {
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={datastyle}>{props.m}</p>
+                  <p style={datastyle}>{Manufacturer}</p>
                 </Grid>
               </Grid>
               <Grid container spacing={2} align="center">
@@ -192,7 +105,7 @@ function Test(props) {
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={datastyle}> {props.p}</p>
+                  <p style={datastyle}>{Part} </p>
                 </Grid>
               </Grid>
               <Grid container spacing={2} align="center">
@@ -202,9 +115,12 @@ function Test(props) {
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={datastyle}>{props.pd}</p>
+                  <p style={datastyle}>{Name}</p>
                 </Grid>
               </Grid>
+
+              <br />
+              <br />
               <Grid container spacing={2} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p
@@ -229,7 +145,7 @@ function Test(props) {
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={datastyle}>{props.v}</p>
+                  <p style={datastyle}>{Vertical}</p>
                 </Grid>
               </Grid>
               <Grid container spacing={2} align="center">
@@ -239,7 +155,7 @@ function Test(props) {
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={datastyle}>{props.c}</p>
+                  <p style={datastyle}>{Choker}</p>
                 </Grid>
               </Grid>
               <Grid container spacing={2} align="center">
@@ -249,14 +165,14 @@ function Test(props) {
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={datastyle}>{props.vb}</p>
+                  <p style={datastyle}>{VerticalB}</p>
                 </Grid>
               </Grid>
               <Grid item xs={2}></Grid>
             </Grid>
           </Grid>{" "}
           {/* middle fat container */}
-        </Grid>{" "}<br/>
+        </Grid>{" "}
         {/*main big container */}
         <Grid container spacing={3}>
           <Grid item lg={2}>
@@ -314,7 +230,7 @@ function Test(props) {
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={datastyle}>{props.f}</p>
+                  <p style={datastyle}>{Fabricator}</p>
                 </Grid>
               </Grid>
               <Grid container spacing={2} align="center">
@@ -356,7 +272,7 @@ function Test(props) {
                   </p>
                 </Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
-                  <p style={datastyle}>{props.d} </p>
+                  <p style={datastyle}>{Date} </p>
                 </Grid>
               </Grid>
             </Grid>
@@ -368,6 +284,25 @@ function Test(props) {
           Distributors, LLC.
         </p>
       </div>
+      <form style={{ textAlign: "center" }}>
+        <Link to="/">
+          <input
+            type="button"
+            value="Back"
+            style={{
+              backgroundColor: "#02192D",
+              border: "none",
+              color: "white",
+              margin: "5px",
+              height: "40px",
+              fontFamily: "Poppins",
+              fontSize: "20px",
+            }}
+          />
+        </Link>
+      </form>
     </div>
   );
-}
+};
+
+export default Certificate;

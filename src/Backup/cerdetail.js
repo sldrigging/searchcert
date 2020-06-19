@@ -56,7 +56,7 @@ const CertDetail = (props) => {
               rowSpan={2}
               style={mystyle}
               onClick={viewCert}
-              style={{ cursor: "pointer", fontSize: "22px", padding:'5px' }}
+              style={{ cursor: "pointer", fontSize: "25px" }}
             >
               View Certificate
             </td>
@@ -88,7 +88,7 @@ const CertDetail = (props) => {
         >
           Print Certificate
         </div>
-        <Test
+        {/* <Test
           printableId="printme"
           s={Serial}
           m={Manufacturer}
@@ -99,7 +99,7 @@ const CertDetail = (props) => {
           vb={VerticalB}
           f={Fabricator}
           d={Date}
-        /> 
+        /> */}
       </div>
     </div>
   );
@@ -256,7 +256,7 @@ function Test(props) {
             </Grid>
           </Grid>{" "}
           {/* middle fat container */}
-        </Grid>{" "}<br/>
+        </Grid>{" "}
         {/*main big container */}
         <Grid container spacing={3}>
           <Grid item lg={2}>

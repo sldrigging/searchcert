@@ -1,60 +1,100 @@
-import React, { useState } from "react";
-import './../App.css';
-import CertDetail from './CertDetail'
+import React from "react";
+import "./../App.css";
+import CertDetail from "./CertDetail";
 
+const initialState = {
+  cert: "",
+  certError: "",
+  filteredData: [],
+  newdata:[]
+};
 
-function Test(props) {
-  const [search, setSearch] = useState("");
-  const [filtereddata, setFilteredData] = useState([]);
-   const [certError] = useState("Please enter a valid Serial Number");
+export default class ValiationForm extends React.Component {
+  constructor(props) {
+    super(props);
 
- 
-
- function handleChange (e) {  
-  setSearch(e.target.value);
+    this.state = initialState;
   }
 
-const data = props.data;
-
-  const onSearch = () => {          
-    setFilteredData(
-      data.filter(cert =>
-        cert.Serial.includes(search)
-      )
-    );
+  handleChange = (event) => {
+    this.setState({
+      cert: event.target.value,
+    });
   };
 
-  return (
-    <div className="App">
-      <h1>Cert Search for Certificate of Conformance</h1>
-      <input
-        type="number" name="cert" min="10000001" max="100000020"   
-      style={{height: '35px', margin: '5px', width:'300px'}}
-        placeholder="Enter the Serial Number (Eg: 10000001)"
-        onChange={handleChange} value={search}
-      />
-      {!search || search < 10000000 || search > 10000025 ?<p style={{color:'grey', fontSize:'14px'}}>{certError}</p> : null} 
-      
-      <br/>
-      <button  
-      disabled={!search || search < 10000001 || search > 10000025} 
-      onClick={onSearch} style={{ backgroundColor:'#02192D',  border:'none', color:'white', height:'40px', fontFamily:'Poppins', fontSize:'20px'}}>Search</button>
+  validate = () => {
+    let certError = "";
+    if (!this.state.cert) {
+      certError = "Serial Number cannot be blank";
+    } else if (this.state.cert.length < 8 || this.state.cert > 10000099) {
+      certError = "Please type in a correct Serial Number";
+    }
+    if (certError) {
+      this.setState({ certError });
+      return false;
+    }
+    return true;
+  };
 
-      {filtereddata.map((cert) => (
-        <CertDetail key={cert.Serial} cert ={cert} />
-      ))} 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const isValid = this.validate();
+    if (isValid) {
+      //console.log("The filtered data",this.state.filteredData);
+      
+      // clear form
+      this.setState({cert: "", certError: "", filteredData: [], newdata: this.state.filteredData});
+    }
+  };
 
-      
-        {/* {filtereddata.map((cert, Serial) => (
-        <Certificate key={Serial} {...cert} />
-      ))}   */}
-      
-                  
-    </div>
-  );
+  handleSearch = (event) => {
+    const cert = this.state.cert;
+    const data = this.props.data;
+    //console.log("Data from handlechange", data);
+    this.setState({
+      filteredData: data.filter((x) => x.Serial.includes(cert)),
+    });
+  };
+
+  render() {    
+   // console.log("hey now",this.state.filteredData)
+    return (
+      <div className="App">
+        <h1>Cert Search for Certificate of Assurance</h1>
+        <form onSubmit={this.handleSubmit}>
+          <div>
+            <input
+              type="number" 
+              // min="10000001" 
+              //max="10000099"   
+              placeholder="Please enter a Serial Number"
+              value={this.state.cert}
+              onChange={this.handleChange}
+            />
+            <div style={{ color: "red", padding: "10px" }}>
+              {this.state.certError}
+            </div>
+          </div>
+          <button 
+          //disabled={!this.state.cert} 
+          type="submit" onClick={this.handleSearch}>
+            Submit
+          </button>
+          
+        </form>
+        {/* <ul>
+           <h3>{this.state.newdata.map(x=> (
+             <div key={x.Serial}>
+           <p>{x.Serial}</p>
+           <p>{x.SN}</p>
+           <p>{x.Fabricator}</p>
+           </div>
+           ))}</h3> 
+           </ul> */}
+            {this.state.newdata.map((cert) => (
+           <CertDetail key={cert.Serial} cert ={cert}/>
+           ))} 
+      </div>
+    );
+  }
 }
-
-
-
-
-export default Test
