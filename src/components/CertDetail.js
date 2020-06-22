@@ -3,27 +3,60 @@ import { Grid } from "@material-ui/core";
 import XQ1 from "./../assets/XQ1.png";
 import XQ2 from "./../assets/XQ2.png";
 import Mike from "./../assets/mike.png";
-import Logo from "./../assets/logo.svg";
+import Logo from "./../assets/logo.png";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const CertDetail = (props) => {
-  function printOrder() {
-    let newWin = window.open("Certificate of Assurance", "hello", "top=20,left=50,width=700,height=650,scrollbars=yes");
-    const printableElements = document.getElementById("printme").innerHTML;
-    const orderHtml =
-      "<html><head><title>Certificate of Conformance</title></head><body>" +
-      printableElements +
-      "</body></html>";
-    const oldPage = document.body.innerHTML;
-    document.body.innerHTML = orderHtml;
-    document.body.innerHTML = oldPage;
-    //window.print();
-    newWin.document.write(printableElements);
-    
-    window.location.reload(false);
-    
+  function printOrder(fileName) {
+    console.log(Serial)
+    window.scroll(0, 15);
+    const input = document.getElementById("printme");
+    html2canvas(input, { scale: "4" }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/jpeg");
+
+      const pdf = new jsPDF('p','pt','a4');
+      pdf.addImage(imgData, "JPEG", -450, 0, 1485, 810);
+      //pdf.addImage(imgData, "JPEG", 0, 0, 100, 100);
+      //pdf.output('dataurlnewwindow');
+      //pdf.save("Certificate of Conformance.pdf");
+
+      pdf.setProperties({
+        title: "THOR-TEX-Cert-"+fileName,
+      });
+      //  let dataSrc = pdf.output("datauristring");
+      //  let win = window.open("", "myWindow");
+      //  win.document.write("<html><head><title>Certificate of Conformance</title></head><body><embed src=" +
+      //  imgData + "></embed></body></html>");
+      pdf.save("THOR-TEX-Cert-"+fileName);
+      let newWindow = window.open("/");
+
+      fetch(pdf.output("datauristring"))
+        .then((res) => res.blob())
+        .then((blob) => {
+          newWindow.location = URL.createObjectURL(blob);
+        });
+    });
   }
+
+  // function printOrder() {
+  //   let newWin = window.open("Certificate of Assurance", "hello", "top=20,left=50,width=700,height=650,scrollbars=yes");
+  //   const printableElements = document.getElementById("printme").innerHTML;
+  //   const orderHtml =
+  //     "<html><head><title>Certificate of Conformance</title></head><body>" +
+  //     printableElements +
+  //     "</body></html>";
+  //   const oldPage = document.body.innerHTML;
+  //   document.body.innerHTML = orderHtml;
+  //   document.body.innerHTML = oldPage;
+  //   //window.print();
+  //   newWin.document.write(printableElements);
+  //   window.location.reload(false);0
+  // }
+
   const mystyle = {
     padding: "8px",
+    border: '2px solid grey'
   };
   function viewCert() {
     document.getElementById("myP").style.display = "block";
@@ -40,65 +73,65 @@ const CertDetail = (props) => {
     Fabricator,
   } = props.cert;
 
-  function handlePrompt  (){
-    window.location.reload(true);
+  // function handlePrompt() {
+  //   window.location.reload(true);
+  // }
+  function handleClick() {
+    document.getElementById("myP").style.display = "block";
+    return <Test cert={props.cert} style={{ display: "none" }} />;
   }
-function handleClick () { 
-  console.log('clicked')
-  document.getElementById("myP").style.display = "block";
-  return (
-    
-  <Test cert={props.cert} style={{display:'none'}}/>
-  )}
+  const fileName = props.cert.Serial;
   return (
     <div align="center">
-       <h2 id="promt" onClick={handlePrompt} style={{cursor:'pointer'}} >Make new Search</h2>
-      <table border="1px solid grey" style={{ margin: "20px" }}>
-        <tbody>
-          <tr>
-            <td style={mystyle}>Serial #</td>
-            <td style={mystyle}>Date</td>
-            <td style={mystyle}>Part #</td>
-            <td style={mystyle}>Name</td>
-            <td style={mystyle}>Vertical WLL</td>
-            <td style={mystyle}>Choker WLL</td>
-            <td style={mystyle}>Vertical Basket WLL</td>
-            <td style={mystyle}>Manufacturer</td>
-             <td
-              rowSpan={2}
-              style={mystyle}
-              onClick={viewCert}
-              style={{ cursor: "pointer", fontSize: "22px", padding:'5px' }}
-               onClick={handleClick}>
-              View Certificate
-            </td> 
-          </tr>
-          <tr>
-            <td style={mystyle}>{Serial}</td>           
-            <td style={mystyle}>{Date}</td>
-            <td style={mystyle}>{Part}</td>
-            <td style={mystyle}>{Name}</td>
-            <td style={mystyle}>{Vertical}</td>
-            <td style={mystyle}>{Choker}</td>
-            <td style={mystyle}>{VerticalB}</td>
-            <td style={mystyle}>{Manufacturer}</td>
-          </tr>
-        </tbody>
-      </table>
-         
+      {/* <button id="promt" onClick={handlePrompt} >Make new Search</button> */}
+      <div align="center">
+        <table          
+          style={{ margin: "20px", textAlign: "center", border:"2px solid grey"}}
+        >
+          <tbody >
+            <tr > 
+              <td style={mystyle}>Serial #</td>
+              <td style={mystyle}>Date</td>
+              <td style={mystyle}>Part #</td>
+              <td style={mystyle}>Name</td>
+              <td style={mystyle}>Vertical WLL</td>
+              <td style={mystyle}>Choker WLL</td>
+              <td style={mystyle}>Vertical Basket WLL</td>
+              <td style={mystyle}>Manufacturer</td>
+              <td
+                rowSpan={2}
+                onClick={viewCert}
+                style={{ cursor: "pointer", fontSize: "22px", padding: "5px", backgroundColor:'#349bcd',color:'white' }}
+                onClick={handleClick}
+              >  View Certificate
+              </td>
+            </tr>
+            <tr>
+              <td style={mystyle}>{Serial}</td>
+              <td style={mystyle}>{Date}</td>
+              <td style={mystyle}>{Part}</td>
+              <td style={mystyle}>{Name}</td>
+              <td style={mystyle}>{Vertical}</td>
+              <td style={mystyle}>{Choker}</td>
+              <td style={mystyle}>{VerticalB}</td>
+              <td style={mystyle}>{Manufacturer}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <div id="myP" className="container" style={{display:'none'}}>
+      <div id="myP" className="" style={{ display: "none" }}>
         <div
-          onClick={() => printOrder()}
+          onClick={() => printOrder(fileName)}
           style={{
             cursor: "pointer",
             fontSize: "25px",
             textDecoration: "underline",
-          }}
-        >
+          }}        >
           Print Certificate
         </div>
-         <Test
+
+        <Test
           printableId="printme"
           s={Serial}
           m={Manufacturer}
@@ -109,7 +142,7 @@ function handleClick () {
           vb={VerticalB}
           f={Fabricator}
           d={Date}
-        />  
+        />
       </div>
     </div>
   );
@@ -122,14 +155,14 @@ const titlestyle = {
   fontSize: "13px",
   paddingRight: "2px",
   margin: "8px",
-  fontFamily: "trade-gothic-next",
+  fontFamily: "Roboto",
 };
 
 const datastyle = {
   fontSize: "13px",
   textAlign: "left",
   margin: "8px",
-  fontFamily: "trade-gothic-next",
+  fontFamily: "Roboto",
 };
 
 function Test(props) {
@@ -137,13 +170,13 @@ function Test(props) {
     <div id={props.printableId}>
       <div
         style={{
-          margin: "10px auto",
-          width: "600px",
-          border: "5px solid black",
+          width: "650px",
+          margin: "15px",
+          // border: "5px solid black",
           padding: "15px",
         }}
-      >
-        <Grid container spacing={0}>
+      ><div style={{border: '5px solid black',  padding: "15px"}}>
+              <Grid container spacing={0} >
           <Grid item lg={6}>
             <img src={Logo} alt="THOR-TEX logo" style={{ height: "63px" }} />
           </Grid>
@@ -166,27 +199,30 @@ function Test(props) {
         </Grid>
         <p
           style={{
-            fontSize: "30px",
+            fontSize: "35px",
+            textAlign: "center",
             margin: "10px 0",
-            fontFamily: "Archivo Black",
+            fontFamily: "Roboto",
+            fontWeight: 700,
           }}
         >
-          {" "}
           CERTIFICATE OF CONFORMANCE
         </p>
         <Grid container spacing={3}>
           <Grid item xs={2}></Grid>
           <Grid item xs={8}>
-            <Grid container spacing={0}>
-              <Grid item xs={6}>
-                <p style={titlestyle}>
-                  <strong>Serial # : </strong>
-                </p>
+            <Grid container spacing={1}>
+              <Grid container spacing={1} align="center">
+                <Grid item xs={6} style={{ padding: "0px" }}>
+                  <p style={titlestyle}>
+                    <strong>Serial :</strong>
+                  </p>
+                </Grid>
+                <Grid item xs={6} style={{ padding: "0px" }}>
+                  <p style={datastyle}>{props.s}</p>
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <p style={datastyle}>{props.s}</p>
-              </Grid>
-              <Grid container spacing={2} align="center">
+              <Grid container spacing={1} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
                     <strong>Manufacturer :</strong>
@@ -196,7 +232,7 @@ function Test(props) {
                   <p style={datastyle}>{props.m}</p>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} align="center">
+              <Grid container spacing={1} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
                     <strong>Part # :</strong>
@@ -206,7 +242,7 @@ function Test(props) {
                   <p style={datastyle}> {props.p}</p>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} align="center">
+              <Grid container spacing={1} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
                     <strong>Part Description : </strong>
@@ -216,7 +252,7 @@ function Test(props) {
                   <p style={datastyle}>{props.pd}</p>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} align="center">
+              <Grid container spacing={1} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p
                     style={{
@@ -233,7 +269,7 @@ function Test(props) {
                   <p style={datastyle}></p>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} align="center">
+              <Grid container spacing={1} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
                     <strong>Vertical WLL : </strong>
@@ -243,7 +279,7 @@ function Test(props) {
                   <p style={datastyle}>{props.v}</p>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} align="center">
+              <Grid container spacing={1} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
                     <strong>Choker WLL : </strong>
@@ -253,7 +289,7 @@ function Test(props) {
                   <p style={datastyle}>{props.c}</p>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} align="center">
+              <Grid container spacing={1} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
                     <strong>Vertical Basket WLL : </strong>
@@ -267,17 +303,18 @@ function Test(props) {
             </Grid>
           </Grid>{" "}
           {/* middle fat container */}
-        </Grid>{" "}<br/>
+        </Grid>{" "}
+        <br />
         {/*main big container */}
         <Grid container spacing={3}>
           <Grid item lg={2}>
-            <img src={XQ2} alt="XQ1" style={{ height: "70px" }} />
+            <img src={XQ2} alt="XQ1" style={{ height: "60px" }} />
           </Grid>
           <Grid item lg={2}>
-            <img src={XQ1} alt="XQ2" style={{ height: "70px" }} />
+            <img src={XQ1} alt="XQ2" style={{ height: "60px" }} />
           </Grid>
-          <Grid item lg={8} style={{ paddingTop: "25px" }}>
-            <p style={{ fontSize: "14px", fontFamily: "trade-gothic-next" }}>
+          <Grid item lg={8} style={{ paddingTop: "20px" }}>
+            <p style={{ fontSize: "14px", fontFamily: "Roboto" }}>
               <i>
                 <strong>
                   Learn more about XQ Quality Assurance at{" "}
@@ -298,7 +335,7 @@ function Test(props) {
           style={{
             fontSize: "15px",
             textAlign: "left",
-            fontFamily: "trade-gothic-next",
+            fontFamily: "Roboto",
           }}
         >
           <strong>Statement: </strong>
@@ -313,12 +350,12 @@ function Test(props) {
           elementum quis sapien. Donec tempus id urna a consequat. Morbi id
           justo quis ipsum cursus finibus in vel odio. Duis sed facilisis nunc.
         </p>
-        <br />
-        <Grid container spacing={3}>
+      
+        <Grid container spacing={2}>
           <Grid item xs={2}></Grid>
           <Grid item xs={8}>
             <Grid container spacing={0}>
-              <Grid container spacing={2} align="center">
+              <Grid container spacing={1} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
                     <strong>Fabricator:</strong>
@@ -328,7 +365,7 @@ function Test(props) {
                   <p style={datastyle}>{props.f}</p>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} align="center">
+              <Grid container spacing={1} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
                     <strong>XQ Admin:</strong>
@@ -346,7 +383,7 @@ function Test(props) {
                   />
                 </Grid>
               </Grid>
-              <Grid container spacing={2} align="center">
+              <Grid container spacing={1} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}></Grid>
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p
@@ -360,7 +397,7 @@ function Test(props) {
                   </p>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} align="center">
+              <Grid container spacing={1} align="center">
                 <Grid item xs={6} style={{ padding: "0px" }}>
                   <p style={titlestyle}>
                     <strong>Date:</strong>
@@ -374,10 +411,11 @@ function Test(props) {
           </Grid>
         </Grid>
         <br />
-        <p style={{ fontSize: "14px", fontFamily: "trade-gothic-next" }}>
+        <p style={{ fontSize: "14px", fontFamily: "Roboto" }}>
           THOR-TEX USA is a registered trademark and division of Sea-Land
           Distributors, LLC.
         </p>
+        </div>
       </div>
     </div>
   );

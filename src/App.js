@@ -16,7 +16,8 @@ class App extends Component {
       callback: (googleData) => {
         this.setState({
           data: googleData,
-        });
+         
+        }); 
       },
       simpleSheet: true,
     });
@@ -24,10 +25,12 @@ class App extends Component {
   }
 
   render() {
-  
-    const { data } = this.state;
     
-    return <Home data={data} />;
+    const { data } = this.state;    
+    return (
+    <Home data={data}/>
+    
+     ) 
   }
 }
 

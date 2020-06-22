@@ -2,6 +2,7 @@ import React from "react";
 import "./../App.css";
 import CertDetail from "./CertDetail";
 
+import Gallary from './Gallary'
 const initialState = {
   cert: "",
   certError: "",
@@ -26,8 +27,8 @@ export default class ValiationForm extends React.Component {
     let certError = "";
     if (!this.state.cert) {
       certError = "Serial Number cannot be blank";
-    } else if (this.state.cert.length < 8 || this.state.cert > 10000099) {
-      certError = "Please type in a correct Serial Number";
+    } else if (this.state.cert.length < 8 || this.state.cert > (10000000 + this.props.data.length)) {
+      certError = "Please type in a valid Serial Number";
     }
     if (certError) {
       this.setState({ certError });
@@ -44,7 +45,7 @@ export default class ValiationForm extends React.Component {
       
       // clear form
       this.setState({cert: "", certError: "", filteredData: [], newdata: this.state.filteredData});
-      document.getElementById("form").style.display = "none";
+      document.getElementById("form").style.display = "block";
     }
   };
 
@@ -60,15 +61,16 @@ export default class ValiationForm extends React.Component {
   
   render() {    
    // console.log("hey now",this.state.filteredData)
+    // const len = this.props.data.length;
     return (
-      <div className="App">
-        <h1>Cert Search for Certificate of Assurance</h1>
-       
+      <div style={{textAlign:'center'}}>
+        <h1 onClick={()=>  window.location.reload(true)} style={{cursor: 'pointer'}}>Cert Search for Certificate of Conformance</h1>
+        <Gallary/>
         <form onSubmit={this.handleSubmit} id="form">
           <div>
             <input
               type="number" 
-              // min="10000001" 
+               //min="10000001" 
               //max="10000099"   
               placeholder="Please enter a Serial Number"
               value={this.state.cert}
@@ -94,9 +96,14 @@ export default class ValiationForm extends React.Component {
            </div>
            ))}</h3> 
            </ul> */}
+
+           {/* <img src="https://images-na.ssl-images-amazon.com/images/I/71iHCT8cx5L._SL1500_.jpg" style={{height:'300px', margin:'20px'}}/> */}
+          
             {this.state.newdata.map((cert) => (
            <CertDetail key={cert.Serial} cert ={cert}/>
            ))} 
+
+           
       </div>
     );
   }
