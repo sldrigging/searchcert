@@ -30,7 +30,7 @@ export default class ValiationForm extends React.Component {
     let certError = "";
     if (!this.state.cert) {
       certError = "Serial Number cannot be blank";
-    } else if (this.state.cert.length < 8 || this.state.cert > (10000000 + this.props.data.length)) {
+    } else if (this.state.cert < 10000001 || this.state.cert > (10000000 + this.props.data.length)) {
       certError = "Please type in a valid Serial Number";
     }
     
@@ -48,7 +48,11 @@ export default class ValiationForm extends React.Component {
       //console.log("The filtered data",this.state.filteredData);
       
       // clear form
-      this.setState({cert: "", certError: "", filteredData: [], newdata: this.state.filteredData});
+      this.setState({
+      cert: "", 
+      certError: "", 
+      filteredData: [], 
+      newdata: this.state.filteredData});
       document.getElementById("form").style.display = "block";
     }
   };

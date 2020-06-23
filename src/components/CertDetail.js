@@ -27,7 +27,7 @@ const CertDetail = (props) => {
       pdf.setProperties({
         title: "THOR-TEX-Cert-"+fileName,
       });      
-      //pdf.save("THOR-TEX-Cert-"+fileName);
+      pdf.save("THOR-TEX-Cert-"+fileName);
       let newWindow = window.open("/");
 
       fetch(pdf.output("datauristring"))
