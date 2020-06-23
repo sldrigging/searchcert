@@ -24,6 +24,8 @@ export default class ValiationForm extends React.Component {
     });
   };
 
+  
+
   validate = () => {
     let certError = "";
     if (!this.state.cert) {
@@ -64,6 +66,7 @@ export default class ValiationForm extends React.Component {
   render() {    
    // console.log("hey now",this.state.filteredData)
     // const len = this.props.data.length;
+    const val = 8 -this.state.cert.length ;
     return (
       <div style={{textAlign:'center'}}>
         <h1 onClick={()=>  window.location.reload(true)} style={{cursor: 'pointer'}}>Cert Search for Certificate of Conformance</h1>
@@ -84,13 +87,17 @@ export default class ValiationForm extends React.Component {
             id="outlined-basic" 
             label="Please enter a Serial Number (########)" variant="outlined"
             value={this.state.cert}
-            onChange={this.handleChange} />
+            onChange={this.handleChange}  />
 
-             <div style={{ color: "red", padding: "10px" }}>
+            <div style={{ padding: "8px" }}>
+            {this.state.cert.length && this.state.cert.length < 9? val + " digits remanining" : null} 
+            </div>
+
+             <div style={{ color: "red", padding: "5px" }}>
              {this.state.cert.length > 8? "Serial number must be less than 9 digits" : null}
             </div>
             
-            <div style={{ color: "red", padding: "10px" }}>
+            <div style={{ color: "red", padding: "5px" }}>
               {this.state.certError}
             </div>
           </div>
