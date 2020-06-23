@@ -1,6 +1,7 @@
 import React from "react";
 import "./../App.css";
 import CertDetail from "./CertDetail";
+import TextField from '@material-ui/core/TextField';
 
 import Gallary from './Gallary'
 const initialState = {
@@ -30,6 +31,7 @@ export default class ValiationForm extends React.Component {
     } else if (this.state.cert.length < 8 || this.state.cert > (10000000 + this.props.data.length)) {
       certError = "Please type in a valid Serial Number";
     }
+    
     if (certError) {
       this.setState({ certError });
       return false;
@@ -68,14 +70,26 @@ export default class ValiationForm extends React.Component {
         <Gallary/>
         <form onSubmit={this.handleSubmit} id="form">
           <div>
-            <input
+            {/* <input
               type="number" 
                //min="10000001" 
               //max="10000099"   
-              placeholder="Please enter a Serial Number"
+              maxLength="10"
+              placeholder="Please enter a Serial Number (########)"
               value={this.state.cert}
               onChange={this.handleChange}
-            />
+            /> */}
+            <TextField 
+            type="number" style={{width:'30%'}}
+            id="outlined-basic" 
+            label="Please enter a Serial Number (########)" variant="outlined"
+            value={this.state.cert}
+            onChange={this.handleChange} />
+
+             <div style={{ color: "red", padding: "10px" }}>
+             {this.state.cert.length > 8? "Serial number must be less than 9 digits" : null}
+            </div>
+            
             <div style={{ color: "red", padding: "10px" }}>
               {this.state.certError}
             </div>

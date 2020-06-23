@@ -7,21 +7,6 @@ body {
 p{
   font-family: 'Roboto', sans-serif;
 }
-input {
-  width: 30%;
-  height: 20px;
-  font-size: 16px;
-  padding: 15px;
-  margin: 5px 0;
-  border:none;
-}
-input[type=number] {
-  background-color: #cae7dd;
-}
-input[type=number]:focus {
-  outline-width: 0;
-  border: 3px solid #555;;
-}
 
 button {
   color:white;
