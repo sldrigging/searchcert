@@ -9,26 +9,25 @@ import jsPDF from "jspdf";
 
 const CertDetail = (props) => {
   function printOrder(fileName) {
-    console.log(Serial)
+    //console.log(Serial)
     window.scroll(0, 15);
     const input = document.getElementById("printme");
     html2canvas(input, { scale: "4" }).then((canvas) => {
       const imgData = canvas.toDataURL("image/jpeg");
-
-      const pdf = new jsPDF('p','pt','a4');
-      pdf.addImage(imgData, "JPEG", -450, 0, 1485, 810);
-      //pdf.addImage(imgData, "JPEG", 0, 0, 100, 100);
-      //pdf.output('dataurlnewwindow');
-      //pdf.save("Certificate of Conformance.pdf");
-
+      var pdf = new jsPDF("p", "mm", "a4");
+      var width = pdf.internal.pageSize.getWidth();    
+      var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+     
+       if (viewportWidth>= 1920){
+      pdf.addImage(imgData, 'JPEG', -175, 0, width*2.65, 0); 
+       }
+       else {
+        pdf.addImage(imgData, 'JPEG', -80, 0, width*1.75, 0);
+       }     
       pdf.setProperties({
         title: "THOR-TEX-Cert-"+fileName,
-      });
-      //  let dataSrc = pdf.output("datauristring");
-      //  let win = window.open("", "myWindow");
-      //  win.document.write("<html><head><title>Certificate of Conformance</title></head><body><embed src=" +
-      //  imgData + "></embed></body></html>");
-      pdf.save("THOR-TEX-Cert-"+fileName);
+      });      
+      //pdf.save("THOR-TEX-Cert-"+fileName);
       let newWindow = window.open("/");
 
       fetch(pdf.output("datauristring"))
@@ -38,22 +37,6 @@ const CertDetail = (props) => {
         });
     });
   }
-
-  // function printOrder() {
-  //   let newWin = window.open("Certificate of Assurance", "hello", "top=20,left=50,width=700,height=650,scrollbars=yes");
-  //   const printableElements = document.getElementById("printme").innerHTML;
-  //   const orderHtml =
-  //     "<html><head><title>Certificate of Conformance</title></head><body>" +
-  //     printableElements +
-  //     "</body></html>";
-  //   const oldPage = document.body.innerHTML;
-  //   document.body.innerHTML = orderHtml;
-  //   document.body.innerHTML = oldPage;
-  //   //window.print();
-  //   newWin.document.write(printableElements);
-  //   window.location.reload(false);0
-  // }
-
   const mystyle = {
     padding: "8px",
     border: '2px solid grey'
@@ -73,18 +56,16 @@ const CertDetail = (props) => {
     Fabricator,
   } = props.cert;
 
-  // function handlePrompt() {
-  //   window.location.reload(true);
-  // }
+  
   function handleClick() {
     document.getElementById("myP").style.display = "block";
     return <Test cert={props.cert} style={{ display: "none" }} />;
   }
   const fileName = props.cert.Serial;
   return (
-    <div align="center">
+    <div >
       {/* <button id="promt" onClick={handlePrompt} >Make new Search</button> */}
-      <div align="center">
+      <div align="center" >
         <table          
           style={{ margin: "20px", textAlign: "center", border:"2px solid grey"}}
         >
@@ -120,7 +101,7 @@ const CertDetail = (props) => {
         </table>
       </div>
 
-      <div id="myP" className="" style={{ display: "none" }}>
+      <div id="myP" className="" style={{ display: "none" }} align="center">
         <div
           onClick={() => printOrder(fileName)}
           style={{
@@ -168,7 +149,7 @@ const datastyle = {
 function Test(props) {
   return (
     <div id={props.printableId}>
-      <div
+      <div align="center"
         style={{
           width: "650px",
           margin: "15px",
