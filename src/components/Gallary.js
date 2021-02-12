@@ -1,8 +1,6 @@
 import React from 'react';
 import img from './../assets/img.png'
 
-
-
 export default function SpacingGrid() {
 
   return (

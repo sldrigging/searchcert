@@ -45,15 +45,15 @@ const CertDetail = (props) => {
     document.getElementById("myP").style.display = "block";
   }
   const {
-    Serial,
-    Date,
-    Part,
-    Name,
-    Vertical,
-    Choker,
-    VerticalB,
-    Manufacturer,
-    Fabricator,
+    serial,
+    date,
+    part,
+    name,
+    vertical,
+    choke,
+    verticalB,
+    manufacturer,
+    fabricator,
   } = props.cert;
 
   
@@ -88,14 +88,14 @@ const CertDetail = (props) => {
               </td>
             </tr>
             <tr>
-              <td style={mystyle}>{Serial}</td>
-              <td style={mystyle}>{Date}</td>
-              <td style={mystyle}>{Part}</td>
-              <td style={mystyle}>{Name}</td>
-              <td style={mystyle}>{Vertical}</td>
-              <td style={mystyle}>{Choker}</td>
-              <td style={mystyle}>{VerticalB}</td>
-              <td style={mystyle}>{Manufacturer}</td>
+              <td style={mystyle}>{serial}</td>
+              <td style={mystyle}>{date}</td>
+              <td style={mystyle}>{part}</td>
+              <td style={mystyle}>{name}</td>
+              <td style={mystyle}>{vertical}</td>
+              <td style={mystyle}>{choke}</td>
+              <td style={mystyle}>{verticalB}</td>
+              <td style={mystyle}>{manufacturer}</td>
             </tr>
           </tbody>
         </table>
@@ -114,15 +114,15 @@ const CertDetail = (props) => {
 
         <Test
           printableId="printme"
-          s={Serial}
-          m={Manufacturer}
-          p={Part}
-          pd={Name}
-          v={Vertical}
-          c={Choker}
-          vb={VerticalB}
-          f={Fabricator}
-          d={Date}
+          s={serial}
+          m={manufacturer}
+          p={part}
+          pd={name}
+          v={vertical}
+          c={choke}
+          vb={verticalB}
+          f={fabricator}
+          d={date}
         />
       </div>
     </div>
