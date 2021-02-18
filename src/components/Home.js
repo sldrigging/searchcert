@@ -9,7 +9,6 @@ import AddCertificate from "./AddCertificate";
 function ValidationForm({ data }) {
   const [cert, setCert] = useState("");
   const [certError, setCertError] = useState("");
-  const [newData, setNewData] = useState([]);
   const [certificate, setCertificate] = useState(null)
 
   const handleChange = (e) => {
@@ -26,6 +25,7 @@ function ValidationForm({ data }) {
   };
 
   const val = 8 - cert.length;
+
   return (
     <div style={{ textAlign: "center" }}>
       <Gallary />

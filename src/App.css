@@ -32,6 +32,15 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.Clear {
+  background-color: #349bcd;
+  border: .5px solid black;
+  border-radius: 4px;
+  padding: 5px;
+  cursor: pointer;
+  margin: 4px;
+}
 /* .App{
   text-align: center;
 }

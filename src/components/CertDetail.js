@@ -51,7 +51,7 @@ const CertDetail = (props) => {
     name,
     vertical,
     choke,
-    verticalB,
+    basket,
     manufacturer,
     fabricator,
   } = props.cert;
@@ -94,7 +94,7 @@ const CertDetail = (props) => {
               <td style={mystyle}>{name}</td>
               <td style={mystyle}>{vertical}</td>
               <td style={mystyle}>{choke}</td>
-              <td style={mystyle}>{verticalB}</td>
+              <td style={mystyle}>{basket}</td>
               <td style={mystyle}>{manufacturer}</td>
             </tr>
           </tbody>
@@ -120,7 +120,7 @@ const CertDetail = (props) => {
           pd={name}
           v={vertical}
           c={choke}
-          vb={verticalB}
+          vb={basket}
           f={fabricator}
           d={date}
         />
