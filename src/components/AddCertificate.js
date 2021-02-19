@@ -560,6 +560,7 @@ function AddCertificate() {
   const [lastSerial, setLastSerial] = useState("")
   const [quantity, setQuantity] = useState(1)
   const [printerLine, setPrinterLine] = useState("")
+  const [serialss, setSerialss] = useState()
 
   const handleSelect = (selectedOption) => {
     if(selectedOption !== null) {
@@ -577,29 +578,41 @@ function AddCertificate() {
     setSerialPrefix("")
   }
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const cert = inputs;
     setLastSerial(cert.serial)
 
     if(quantity > 1) {
+      let arr = []
       const forLoop = async () => {
         console.log('start')
-
-        for(let idx = 1; idx <= quantity; idx++) {
-          setLastSerial((prevState) => { 
-            return prevState + 1
-          })
-          console.log(lastSerial)
+        
+        for(let idx = 0; idx < quantity; idx++) {
+          let someNum = Number(cert.serial) + idx
+          arr.push({...cert, serial: someNum})
+          console.log(someNum)
+          
         }
-
         console.log('end')
+        console.log(arr)
+        
+        
+        await axios.post("/thortex/certs", arr)
       }
       forLoop();
-    } 
+      
+      setLastSerial(arr[arr.length - 1].serial)
+      setInputs(initialState);
+    }  else {
+      setInputs(initialState);
+      await axios.post("/thortex", cert);
+    }
    
-    setInputs(initialState);
-    await axios.post("/thortex", cert);
+    
+    
   };
 
     useEffect(() => {
