@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import ReactHTMLDatalist from "react-html-datalist";
 import Select from 'react-select'
 
 function AddCertificate() {
@@ -580,17 +579,27 @@ function AddCertificate() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // If qty > 1
-     // Submit certification
-     // Increment the Serial number
-     // Submit another certification
-     // set last serial number
-     // repeat until amount so submissions equals qty set
     const cert = inputs;
     setLastSerial(cert.serial)
+
+    if(quantity > 1) {
+      const forLoop = async () => {
+        console.log('start')
+
+        for(let idx = 1; idx <= quantity; idx++) {
+          setLastSerial((prevState) => { 
+            return prevState + 1
+          })
+          console.log(lastSerial)
+        }
+
+        console.log('end')
+      }
+      forLoop();
+    } 
+   
     setInputs(initialState);
     await axios.post("/thortex", cert);
-    setInputs(initialState);
   };
 
     useEffect(() => {
@@ -619,6 +628,7 @@ function AddCertificate() {
       <p>Serial Prefix: {serialPrefix && serialPrefix}</p>
       <p>Last Serial: {lastSerial && lastSerial}</p>
       <p>Printer Line: {printerLine}</p>
+
       <form>
         <input
           type="text"
@@ -728,8 +738,9 @@ function AddCertificate() {
         />
         <button onClick={handleSubmit}>Submit</button>        
       </form>
+
       <button onClick={clear}>Clear</button>
-      <label>Quantity:</label><input type="text" name="qty" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+      <label>Quantity: </label><input type="text" name="qty" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
     </>
   );
 }
