@@ -53,7 +53,7 @@ function ValidationForm({ data }) {
 
           <div style={{ color: "red", padding: "5px" }}>{certError}</div>
         </div>
-        <button type="submit" onClick={handleSearch}>
+        <button type="submit" onClick={handleSearch} disabled={cert.length !== 9 }>
           Submit
         </button>
       </form>

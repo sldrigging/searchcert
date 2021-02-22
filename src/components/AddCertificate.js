@@ -560,11 +560,12 @@ function AddCertificate() {
   const [lastSerial, setLastSerial] = useState("")
   const [quantity, setQuantity] = useState(1)
   const [printerLine, setPrinterLine] = useState("")
-  const [serialss, setSerialss] = useState()
+  const [successMsg, setSuccessMsg] = useState(null)
+
 
   const handleSelect = (selectedOption) => {
     if(selectedOption !== null) {
-      setDetail({part_id: selectedOption.value})
+      setDetail({ part_id: selectedOption.value })
     }
   }
 
@@ -572,13 +573,15 @@ function AddCertificate() {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(lastSerial)
+  }
+
   const clear = () => {
     setInputs(initialState)
     setPrinterLine("")
     setSerialPrefix("")
   }
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -588,31 +591,23 @@ function AddCertificate() {
     if(quantity > 1) {
       let arr = []
       const forLoop = async () => {
-        console.log('start')
-        
         for(let idx = 0; idx < quantity; idx++) {
-          let someNum = Number(cert.serial) + idx
-          arr.push({...cert, serial: someNum})
-          console.log(someNum)
-          
+          let newSerialNum = Number(cert.serial) + idx
+          arr.push({...cert, serial: newSerialNum}) 
         }
-        console.log('end')
-        console.log(arr)
-        
-        
         await axios.post("/thortex/certs", arr)
       }
-      forLoop();
-      
+      forLoop();  
       setLastSerial(arr[arr.length - 1].serial)
       setInputs(initialState);
     }  else {
       setInputs(initialState);
-      await axios.post("/thortex", cert);
+      let response = await axios.post("/thortex", cert);
+      setSuccessMsg(response.data.success)
+      setTimeout(() => {
+        setSuccessMsg(null)
+      }, 4000);
     }
-   
-    
-    
   };
 
     useEffect(() => {
@@ -639,9 +634,9 @@ function AddCertificate() {
       />
       
       <p>Serial Prefix: {serialPrefix && serialPrefix}</p>
-      <p>Last Serial: {lastSerial && lastSerial}</p>
+      <p>Last Serial: {lastSerial && lastSerial} <span onClick={handleCopy}>Copy to clipboard</span></p> 
       <p>Printer Line: {printerLine}</p>
-
+      {successMsg && successMsg}
       <form>
         <input
           type="text"
@@ -753,7 +748,7 @@ function AddCertificate() {
       </form>
 
       <button onClick={clear}>Clear</button>
-      <label>Quantity: </label><input type="text" name="qty" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+      <label>Quantity: <input type="text" name="qty" value={quantity} onChange={(e) => setQuantity(e.target.value)} /></label>
     </>
   );
 }
